@@ -40,5 +40,28 @@ def perceptron(X, Y, theta, eta=1):
         remake_num += 1 #調整次數+1
     return theta,remake_num #回傳參數
 
+#Q15
 theta, num = perceptron(X,Y,theta)
-print(num)
+print('一次theta更新次數：',num,'\n')
+
+#Q16
+total = 0
+for i in range(2000):
+    theta = np.zeros((row,1))
+    randpos = np.random.permutation(col) #random用
+    Xrnd = X[randpos, :]
+    Yrnd = Y[randpos, 0:1]
+    theta, num = perceptron(Xrnd, Yrnd, theta)
+    total += num
+print('2000次平均每次theta更新的次數：',total/2000,'\n')
+
+#Q17
+total = 0
+for i in range(2000):
+    theta = np.zeros((row,1))
+    randpos = np.random.permutation(col) #random用
+    Xrnd = X[randpos, :]
+    Yrnd = Y[randpos, 0:1]
+    theta, num = perceptron(Xrnd, Yrnd, theta, 0.5) #更改比例
+    total += num
+print('2000次平均每次theta更新的次數：',total/2000,'\n')
